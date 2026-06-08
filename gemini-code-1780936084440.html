@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Lista de Desejos - ODoutorr</title>
+    <!-- Adicionando Fontes e Ícones -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #9146FF; /* Roxo Twitch */
+            --primary-hover: #772ce8;
+            --bg-dark: #121620; /* Cor de fundo base */
+            --bg-card: #1e2538;
+            --border-color: #2e374f;
+            --text-light: #ffffff;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            
+            /* --- NOVO FUNDO ADICIONADO AQUI --- */
+            background-image: linear-gradient(rgba(18, 22, 32, 0.4), rgba(18, 22, 32, 0.4)), url('Design sem nome (1).png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            padding: 40px 20px;
+            text-align: center;
+            /* Um leve fundo semi-transparente no container ajuda a destacar os botões caso o traço passe por trás */
+            background-color: rgba(18, 22, 32, 0.6);
+            border-radius: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+        }
+
+        /* --- CABEÇALHO DO STREAMER --- */
+        .profile {
+            margin-bottom: 30px;
+        }
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(145, 70, 255, 0.4);
+        }
+        .profile h2 {
+            font-size: 24px;
+            margin: 0 0 5px 0;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: var(--text-light);
+            background-color: rgba(30, 37, 56, 0.8);
+            text-decoration: none;
+            font-size: 1.1rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        .social-btn:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(145, 70, 255, 0.4);
+        }
+
+        /* --- LINKS E BIO --- */
+        h1 {
+            font-size: 26px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .bio {
+            font-size: 15px;
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+        .btn-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: rgba(30, 37, 56, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 18px 24px;
+            margin-bottom: 16px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.2s, border-color 0.2s, transform 0.2s;
+        }
+        .btn-link:hover {
+            background-color: #242d44;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        .btn-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* --- PIX --- */
+        .pix-section {
+            margin-top: 40px;
+            border-top: 1px solid rgba(46, 55, 79, 0.5);
+            padding-top: 35px;
+        }
+        .pix-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        /* Link do QR Code */
+        .qr-link {
+            display: inline-block;
+            transition: transform 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .qr-link:hover {
+            transform: scale(1.05);
+        }
+        .qr-code {
+            width: 180px;
+            height: auto;
+            border-radius: 12px;
+            display: block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+        
+        .pix-input-group {
+            display: flex;
+            background-color: rgba(30, 37, 56, 0.9);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            max-width: 360px;
+            margin: 0 auto;
+        }
+        .pix-key {
+            flex: 1;
+            padding: 12px;
+            font-family: monospace;
+            font-size: 13px;
+            color: #cbd5e1;
+            border: none;
+            background: transparent;
+            text-overflow: ellipsis;
+            outline: none;
+        }
+        .copy-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        .copy-btn:hover {
+            background-color: var(--primary-hover);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Cabeçalho de Perfil -->
+        <div class="profile">
+            <!-- Avatar -->
+            <img src="20260503_050544_0000_with_bgc.jpg" alt="ODoutorr Avatar" class="avatar">
+            <h2>ODoutorr</h2>
+            <div class="social-links">
+                <a href="https://www.twitch.tv/odoutorr1" target="_blank" class="social-btn"><i class="fa-brands fa-twitch"></i></a>
+                <a href="https://www.tiktok.com/@odoutorr1" target="_blank" class="social-btn"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://youtube.com/@odoutorr" target="_blank" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+
+        <!-- Seção de Links -->
+        <div class="link-section">
+            <h1>Minha Lista de Desejos</h1>
+            <p class="bio">
+                💜 Sua presença na live já é um presente, mas se quiser me mimar e ajudar no crescimento do canal, deixei algumas ideias na minha wishlist! ✨
+            </p>
+
+            <div class="links">
+                <a href="https://store.steampowered.com/wishlist/id/odoutorr/?sort=dateadded" target="_blank" class="btn-link">
+                    <div class="btn-content">
+                        <span>🎮</span>
+                        <span>Lista de Desejos Steam</span>
+                    </div>
+                    <span><i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+            </div>
+
+            <!-- Seção PIX -->
+            <div class="pix-section">
+                <div class="pix-title"><i class="fa-brands fa-pix"></i> Presente via PIX</div>
+                
+                <!-- QR Code clicável -->
+                <a href="https://midfielder.tv.br/odoutorr1" target="_blank" class="qr-link">
+                    <img src="qrcode-midfielder.png" alt="QR Code PIX para Midfielder" class="qr-code">
+                </a>
+                
+                <div class="pix-input-group">
+                    <input type="text" class="pix-key" value="c6d40ec6-20af-428a-a5f6-b9f7dba1459d" id="pixKey" readonly>
+                    <button class="copy-btn" onclick="copiarPix()">Copiar</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function copiarPix() {
+            var copyText = document.getElementById("pixKey");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); 
+            navigator.clipboard.writeText(copyText.value);
+            
+            alert("Chave PIX copiada com sucesso! 💜");
+        }
+    </script>
+
+</body>
+</html>
